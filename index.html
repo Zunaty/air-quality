@@ -1,13 +1,352 @@
+
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Air Quality</title>
-    </head>
 
-    <body>
-        
-    </body>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Air Quality</title>
+  <!-- Bulma Version 0.9.0-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css" />
+ 
+  <script src="https://kit.fontawesome.com/2828f7885a.js"
+    integrity="sha384-WAsFbnLEQcpCk8lM1UTWesAf5rGTCvb2Y+8LvyjAAcxK1c3s5c0L+SYOgxvc6PWG"
+    crossorigin="anonymous"></script>
+ 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,300&family=Roboto:ital,wght@0,400;1,100&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <h1 class="title">Air Quality</h1>
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item" href="https://www.airnow.gov/resources/web-cams/" target="_blank">Air Quality Webcams</a>
+          <a class="navbar-item" href="https://fire.airnow.gov/" target="_blank">Fires</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+
+  <section class="hero is-medium">
+    <div class="hero-body has-text-centered">
+
+      <h1 class="title is-3">Search Air Quality</h1>
+      <div id="hero-input" class="field has-addons has-addons-centered">
+        <div class="control">
+          <input class="input is-medium" id="input-text" type="text" placeholder="Search..." />
+        </div>
+
+        <div class="control">
+          <a class="button is-medium is-link" id="search">
+            <i class="fal fa-search"></i>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+
+  <div class="container is-max-desktop ">
+
+    <div class="notification is-link is-overlay" id="cat-modal">
+      <button class="delete"></button>
+      <h1 class="title is-4">Cat Facts:</h1>
+      <p class="subtitle is-italic" id="cat-facts">Cats walk like camels and giraffes: They move both of their right feet first, then move both of their left feet. No other animals walk this way.</p>
+    </div>
+    <!-- cat facts modal -->
+
+
+    
+    <section class="section is-hidden" id="data-display">
+
+      <h2 class="title is-size-2 has-text-grey-dark mt-0" id="main-city-name">Salt Lake City</h2>
+
+      <div class="tile is-ancestor">
+        <div class="tile is-vertical is-8">
+          
+      
+              <div class="tile"> 
+              <div class="tile is-parent">
+                  <article class="tile is-child notification is-link">
+                   
+                    <p class="subtitle" id="current-condition">Poor <span id="aqi">55 AQI</span></p>
+                  <p class="subtitle is-size-6" id="description">The air has reached a high level of pollution and is unhealthy for sensitive groups. Reduce time spent outside if you are feeling symptoms such as difficulty breathing or throat irritation. Stay inside, close the windows, try not to inhale too deeply. Avoid smoking. Avoid making any dust or disturbance.</p>
+                  </article>
+                </div>
+              </div>
+            
+
+        </div>
+        <!-- main content -->
+
+            <div class="tile is-parent">
+              <article class="tile is-child notification is-link">
+                <div class="content">
+                  <p class="title">Aside</p>
+                  <p class="subtitle is-size-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quvoluptate quga et accusantium. Ad asperiores alias culpa aspernatur rerum rem quam, iste delectus deserunt nobis, distinctio cupiditate optio.</p>
+                </div>
+              </article>
+            </div>
+            <!-- aside -->
+
+
+      </div>
+      <!-- tiles -->
+
+
+
+      <h2 class="title is-5 has-text-grey-dark mt-5">Five Day Air Quality Forecast for <span class="is-italic is-bold" id="five-day-city">Salt Lake City</span></h2>
+       
+      <div class="columns ">
+
+      
+       
+        <div class="column has-text-centered">
+          <article>
+
+            <figure class="has-background-link has-text-centered mb-2">
+              <i class="fas fa-wind fa-lg mb-2 mt-2"></i>
+              <p class="is-size-7">US AQi</p>
+              <p class="is-size-3 has-text-grey-lighter" id="us-aqi">18</p>
+            </figure>
+
+            <h4 class="title is-6 has-text-grey-dark">Air pollution level</h4>
+            <p class="subtitle is-6" id="air-polution-level">Good</p>
+
+           
+           
+            <h4 class="title is-6 has-text-grey-dark">Main Pollutant</h4>
+            <p class="subtitle is-6" id="main-pollutant">PM2.5</p>
+
+          </article>
+        </div>
+        <!-- column -->
+       
+      
+       
+        <div class="column has-text-centered">
+          <article>
+
+            <figure class="has-background-link has-text-centered mb-2">
+               <i class="fas fa-wind fa-lg mb-2 mt-2"></i>
+              <p class="is-size-7">US AQi</p>
+              <p class="is-size-3 has-text-grey-lighter" id="us-aqi">18</p>
+            </figure>
+
+            <h4 class="title is-6 has-text-grey-dark">Air pollution level</h4>
+            <p class="subtitle is-6" id="air-polution-level">Good</p>
+
+           
+           
+            <h4 class="title is-6 has-text-grey-dark">Main Pollutant</h4>
+            <p class="subtitle is-6" id="main-pollutant">PM2.5</p>
+
+          </article>
+        </div>
+        <!-- column -->
+       
+      
+       
+        <div class="column has-text-centered">
+          <article>
+
+            <figure class="has-background-link has-text-centered mb-2">
+               <i class="fas fa-wind fa-lg mb-2 mt-2"></i>
+              <p class="is-size-7">US AQi</p>
+              <p class="is-size-3 has-text-grey-lighter" id="us-aqi">18</p>
+            </figure>
+
+            <h4 class="title is-6 has-text-grey-dark">Air pollution level</h4>
+            <p class="subtitle is-6" id="air-polution-level">Good</p>
+
+           
+           
+            <h4 class="title is-6 has-text-grey-dark">Main Pollutant</h4>
+            <p class="subtitle is-6" id="main-pollutant">PM2.5</p>
+
+          </article>
+        </div>
+        <!-- column -->
+       
+      
+       
+        <div class="column has-text-centered">
+          <article>
+
+            <figure class="has-background-link has-text-centered mb-2">
+               <i class="fas fa-wind fa-lg mb-2 mt-2"></i>
+              <p class="is-size-7">US AQi</p>
+              <p class="is-size-3 has-text-grey-lighter" id="us-aqi">18</p>
+            </figure>
+
+            <h4 class="title is-6 has-text-grey-dark">Air pollution level</h4>
+            <p class="subtitle is-6" id="air-polution-level">Good</p>
+
+           
+           
+            <h4 class="title is-6 has-text-grey-dark">Main Pollutant</h4>
+            <p class="subtitle is-6" id="main-pollutant">PM2.5</p>
+
+          </article>
+        </div>
+        <!-- column -->
+       
+      
+       
+        <div class="column has-text-centered">
+          <article>
+
+            <figure class="has-background-link has-text-centered mb-2">
+               <i class="fas fa-wind fa-lg mb-2 mt-2"></i>
+              <p class="is-size-7">US AQi</p>
+              <p class="is-size-3 has-text-grey-lighter" id="us-aqi">18</p>
+            </figure>
+
+            <h4 class="title is-6 has-text-grey-dark">Air pollution level</h4>
+            <p class="subtitle is-6" id="air-polution-level">Good</p>
+
+           
+           
+            <h4 class="title is-6 has-text-grey-dark">Main Pollutant</h4>
+            <p class="subtitle is-6" id="main-pollutant">PM2.5</p>
+
+          </article>
+        </div>
+        <!-- column -->
+       
+
+
+
+      </div>
+      <!-- columns -->
+    </section>
+    <!-- section -->
+
+
+
+    <section class="mt-6">
+      <div class="columns is-multiline">
+        <div class="column is-6">
+          <div class="category">
+            <h1 class="title is-5">
+              Ways to help 
+            </h1>
+            <hr />
+            <ul>
+              <li>
+                <i class="fas fa-caret-right fa-xs icon-padding-right" /></i>
+                Lorem ipsum dolor sit amet.
+              </li>
+              <li>
+                <i class="fas fa-caret-right fa-xs icon-padding-right" /></i>
+               Lorem ipsum dolor sit amet consectetur.
+              </li>
+              <li>
+                <i class="fas fa-caret-right fa-xs icon-padding-right" /></i>
+                Lorem ipsum dolor sit.
+              </li>
+              <li>
+                <i class="fas fa-caret-right fa-xs icon-padding-right" /></i>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              </li>
+              <li>
+            </ul>
+            
+          </div>
+        </div>
+
+
+        <div class="column is-6">
+          <div class="category">
+            <h1 class="title is-5">
+              FAQs 
+            </h1>
+            <hr />
+            <ul>
+              <li>
+                <i class="fas fa-caret-right fa-xs icon-padding-right" /></i>
+                Lorem ipsum dolor, sit amet consectetur adipisicing.
+              </li>
+              <li>
+                <i class="fas fa-caret-right fa-xs icon-padding-right" /></i>
+                Lorem ipsum dolor sit.
+              </li>
+              <li>
+                <i class="fas fa-caret-right fa-xs icon-padding-right" /></i>
+                Lorem ipsum dolor sit amet consectetur.
+              </li>
+              <li>
+                <i class="fas fa-caret-right fa-xs icon-padding-right" /></i>
+               Lorem, ipsum dolor.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+      
+      </div>
+      <!-- columns -->
+    </section>
+    <!-- section faqs and ways to help -->
+
+
+
+
+  </div>
+  <!-- container -->
+
+
+
+
+  <footer class="footer mt-6">
+    <div class="content has-text-centered">
+      <p>
+        <a href="#">Links</a> | <a href="#">Links</a> | <a href="#">Links</a>
+    
+      </p>
+    </div>
+  </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="./assets/js/script.js"></script>
+</body>
+
 </html>
