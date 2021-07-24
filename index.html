@@ -81,13 +81,14 @@
         </div>
         <!-- cat facts modal -->
         
-        
-        <section class="section is-hidden" id="data-display">
+      
+        <section class="section is-hidden " id="data-display">
 
             <h2 class="title is-size-2 has-text-grey-dark mt-0" id="main-city-name">Salt Lake City</h2>
 
             <div class="tile is-ancestor">
-                <div class="tile is-vertical is-8">
+                <div class="tile is-vertical is-4">
+                    <!-- changing is-* adjusts main content width and changes aside. -->
 
 
                     <div class="tile">
@@ -111,10 +112,40 @@
                 <div class="tile is-parent">
                     <article class="tile is-child notification is-link">
                         <div class="content">
-                            <p class="title">Aside</p>
-                            <p class="subtitle is-size-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum
-                                quvoluptate quga et accusantium. Ad asperiores alias culpa aspernatur rerum rem quam,
-                                iste delectus deserunt nobis, distinctio cupiditate optio.</p>
+                            <p class="title is-size-4">Air Quality Index <span class="title is-size-6">(AQI)</span></p>
+                            
+                            <article class="tile is-child notification is-good">
+                                <p class="title  is-size-5 mb-5 ">Good <span class="title is-size-6 has-text-grey-dark">0-50</span></p>
+                                <p class="subtitle has-text-grey-dark is-size-6 ">Air quality is satisfactory and poses little or no risk.
+                             </article>
+
+                            <article class="tile is-child notification is-moderate">
+                                <p class="title  is-size-5 mb-5">Moderate <span class="title is-size-6  has-text-grey-dark">51-100</span></p>
+                                <p class="subtitle has-text-grey-dark is-size-6 ">Sensitive individuals should avoid outdoor activity as they may experience respiratory symptoms.</p>                            
+                            </article>
+                            
+                            <article class="tile is-child notification is-unhealthy-sensitive-groups">
+                                <p class="title  is-size-5 mb-5">Unhealthy for Sensitive Groups <span class="title is-size-6  has-text-grey-dark">101-150</span></p>
+                                <p class="subtitle has-text-grey-dark is-size-6 ">General public and sensitive individuals in particular are at risk to experience irritation and respiratory problems</p>                            
+                            </article>
+
+                            <article class="tile is-child notification is-unhealthy">
+                                <p class="title  is-size-5 mb-5">Unhealthy <span class="title is-size-6  has-text-grey-dark">151-200</span></p>
+                                <p class="subtitle has-text-grey-dark is-size-6 ">Increased likelihood of adverse effects and aggravation to the heart and lungs among general public</p>                            
+                            </article>
+                            
+                            <article class="tile is-child notification is-very-unhealthy">
+                                <p class="title  is-size-5 mb-5"> Very Unhealthy <span class="title is-size-6  has-text-grey-dark">201-300</span></p>
+                                <p class="subtitle has-text-grey-dark is-size-6 ">General public will be noticeably affected. Sensitive groups should restrict outdoor activities.</p>                            
+                            </article>
+                            
+                            <article class="tile is-child notification is-hazardous">
+                                <p class="title  is-size-5 mb-5"> Hazardous <span class="title is-size-6  has-text-grey-dark">301+</span></p>
+                                <p class="subtitle has-text-grey-dark is-size-6 ">General public will be noticeably affected. Sensitive groups should restrict outdoor activities.</p>                            
+                            </article>
+
+
+                           
                         </div>
                     </article>
                 </div>
