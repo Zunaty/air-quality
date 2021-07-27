@@ -54,8 +54,23 @@ function catFact() {
 // This will search for a city's long and lat, then search with those coords for weather
 function searchWeather() {
   var searchInput = document.getElementById('input-text').value;
-  searchHistory.push(searchInput);
-  console.log(searchHistory);
+  // This is grabing the same input but making it lowercase for the array
+  var searchToL = document.getElementById('input-text').value.toLowerCase();
+
+  if(!searchInput){
+    // Need to add an alert modal
+  }
+
+  searchHistory.push(searchToL);
+  searchHistory = searchHistory.filter((x, index) => {
+    return searchHistory.indexOf(x) === index;
+  });
+
+  searchHistory = searchHistory.slice(-5);
+  removeAllChildNodes(document.querySelector('#dropdown-history'));
+  searchHistory.forEach(createSH)
+
+  saveLocal()
 
   // Getting search input to become lat and long
   fetch('http://api.positionstack.com/v1/forward?access_key=8b6705bd3db1ed3c15005b1f93926e8e&query=' + searchInput)
@@ -116,7 +131,6 @@ function searchWeather() {
         })
         .then(function (forecastInfo) {
           console.log(forecastInfo);
-          //console.log(forecastInfo.data[0].aqi)
           document.getElementById('five-day-city').innerHTML = cityF + ", " + stateF;
           for (var i = 0; i < 3; i++) {
             var x = i + 1;
@@ -147,10 +161,41 @@ function searchWeather() {
             }
             z = z + 24;
           }
-
         });
     })
 }
 
+// Saving array to local storage
+function saveLocal() {
+  localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+};
+
+// Loading array from local storage and creating relevent anchors for each
+function load() {
+  searchHistory = JSON.parse(localStorage.getItem("searchHistory"));
+
+  if(!searchHistory) {
+      searchHistory = [];
+  }
+
+  searchHistory.forEach(createSH);
+};
+
+// Creating an anchor for each search
+function createSH(x) {
+  var a = document.createElement("a");
+  a.className = "dropdown-item";
+  a.innerHTML = x;
+  document.getElementById('dropdown-history').appendChild(a);
+};
+
+// Removing all previous searches to update list
+function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+  }
+};
+
 catFact();
+load();
 
