@@ -47,8 +47,23 @@ function catFact() {
 // This will search for a city's long and lat, then search with those coords for weather
 function searchWeather() {
   var searchInput = document.getElementById('input-text').value;
-  searchHistory.push(searchInput);
-  console.log(searchHistory);
+  // This is grabing the same input but making it lowercase for the array
+  var searchToL = document.getElementById('input-text').value.toLowerCase();
+
+  if(!searchInput){
+    // Need to add an alert modal
+  }
+
+  searchHistory.push(searchToL);
+  searchHistory = searchHistory.filter((x, index) => {
+    return searchHistory.indexOf(x) === index;
+  });
+
+  searchHistory = searchHistory.slice(-5);
+  removeAllChildNodes(document.querySelector('#dropdown-history'));
+  searchHistory.forEach(createSH)
+
+  saveLocal()
 
   // Getting search input to become lat and long
   fetch('http://api.positionstack.com/v1/forward?access_key=8b6705bd3db1ed3c15005b1f93926e8e&query=' + searchInput)
@@ -73,15 +88,15 @@ function searchWeather() {
           var aqiNum = weatherData.data.current.pollution.aqius;
           if(aqiNum >= 0 && aqiNum <= 50) {
             document.getElementById('aqi').setAttribute("style", "color:green;");
-          } else if(aqiNum >= 51 && aqiNum <= 100) {
+          } else if (aqiNum >= 51 && aqiNum <= 100) {
             document.getElementById('aqi').setAttribute("style", "color:yellow;");
-          } else if(aqiNum >= 101 && aqiNum <= 150) {
+          } else if (aqiNum >= 101 && aqiNum <= 150) {
             document.getElementById('aqi').setAttribute("style", "color:orange;");
-          } else if(aqiNum >= 151 && aqiNum <= 200) {
+          } else if (aqiNum >= 151 && aqiNum <= 200) {
             document.getElementById('aqi').setAttribute("style", "color:red;");
-          } else if(aqiNum >= 201 && aqiNum <= 300) {
+          } else if (aqiNum >= 201 && aqiNum <= 300) {
             document.getElementById('aqi').setAttribute("style", "color:purple;");
-          } else if(aqiNum >= 301) {
+          } else if (aqiNum >= 301) {
             document.getElementById('aqi').setAttribute("style", "color:brown;");
           }
         });
@@ -103,31 +118,62 @@ function searchWeather() {
             document.getElementById(`us-aqi${x}`).innerHTML = forecastInfo.data[z].aqi;
             document.getElementById(`main-pollutant${x}`).innerHTML = forecastInfo.data[z].pm25;
             document.getElementById(`forecast-date-${x}`).innerHTML = moment.unix(time).format('L');
-            if(y >= 0 && y <= 50) {
+            if (y >= 0 && y <= 50) {
               document.getElementById(`air-polution-level${x}`).innerHTML = "Good";
               document.getElementById(`air-polution-level${x}`).setAttribute("style", "color:green;");
-            } else if(y >= 51 && y <= 100) {
+            } else if (y >= 51 && y <= 100) {
               document.getElementById(`air-polution-level${x}`).innerHTML = "Moderate";
               document.getElementById(`air-polution-level${x}`).setAttribute("style", "color:yellow;");
-            } else if(y >= 101 && y <= 150) {
+            } else if (y >= 101 && y <= 150) {
               document.getElementById(`air-polution-level${x}`).innerHTML = "Unhealthy";
               document.getElementById(`air-polution-level${x}`).setAttribute("style", "color:orange;");
-            } else if(y >= 151 && y <= 200) {
+            } else if (y >= 151 && y <= 200) {
               document.getElementById(`air-polution-level${x}`).innerHTML = "Unhealthy";
               document.getElementById(`air-polution-level${x}`).setAttribute("style", "color:red;");
-            } else if(y >= 201 && y <= 300) {
+            } else if (y >= 201 && y <= 300) {
               document.getElementById(`air-polution-level${x}`).innerHTML = "Very Unhealthy";
               document.getElementById(`air-polution-level${x}`).setAttribute("style", "color:purple;");
-            } else if(y >= 301) {
+            } else if (y >= 301) {
               document.getElementById(`air-polution-level${x}`).innerHTML = "Hazardous";
               document.getElementById(`air-polution-level${x}`).setAttribute("style", "color:brown;");
             }
             z = z + 24;
           }
-          
         });
     })
 }
 
+// Saving array to local storage
+function saveLocal() {
+  localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+};
+
+// Loading array from local storage and creating relevent anchors for each
+function load() {
+  searchHistory = JSON.parse(localStorage.getItem("searchHistory"));
+
+  if(!searchHistory) {
+      searchHistory = [];
+  }
+
+  searchHistory.forEach(createSH);
+};
+
+// Creating an anchor for each search
+function createSH(x) {
+  var a = document.createElement("a");
+  a.className = "dropdown-item";
+  a.innerHTML = x;
+  document.getElementById('dropdown-history').appendChild(a);
+};
+
+// Removing all previous searches to update list
+function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+  }
+};
+
 catFact();
+load();
 
