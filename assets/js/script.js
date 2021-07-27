@@ -1,4 +1,4 @@
-// This holds all searched items
+//This holds all searched items
 var searchHistory = [];
 
 // Hamburger menu functionality
