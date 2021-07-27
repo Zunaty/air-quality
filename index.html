@@ -51,11 +51,15 @@
 
     <section class="hero is-medium">
         <div class="hero-body has-text-centered">
-
             <h1 class="title is-3">Search Air Quality</h1>
-            <div id="hero-input" class="field has-addons has-addons-centered">
+            <div id="hero-input" class="field has-addons has-addons-centered dropdown is-hoverable">
                 <div class="control">
-                    <input class="input is-medium" id="input-text" type="text" placeholder="Search..." />
+                    <input class="input is-medium dropdown-trigger" id="input-text" type="text" placeholder="Search..." />
+                    <div class="dropdown-menu dropdownH" role="menu">
+                        <div id="dropdown-history" class="dropdown-content" >
+                            <a class="dropdown-item"></a>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="control">

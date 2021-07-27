@@ -93,8 +93,8 @@ function searchWeather() {
         })
         .then(function(forecastInfo) {
           console.log(forecastInfo);
-          //console.log(forecastInfo.data[0].aqi)
           document.getElementById('five-day-city').innerHTML = cityF + ", " + stateF;
+          
           for(var i = 0; i < 3; i++) {
             var x = i + 1;
             var y = forecastInfo.data[z].aqi;
