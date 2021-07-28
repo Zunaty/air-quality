@@ -33,7 +33,7 @@ $("#search").click(function () {
 });
 $(document).on('keypress', function (e) {
   if (e.which == 13) {
-    $("data-display").removeClass("is-hidden");
+    $("#data-display").removeClass("is-hidden");
     searchWeather();
   }
 });
@@ -46,7 +46,7 @@ function catFact() {
     })
     .then(function (catData) {
       var catP = document.getElementById('cat-modal');
-      catP.innerHTML = catData[0].text;
+      catP.innerHTML = catData.text;
       console.log(catData)
     });
 }
@@ -95,7 +95,7 @@ function searchWeather() {
           // Description context pulled from airnow.gov/air-quality-guide
           var aqiNum = weatherData.data.current.pollution.aqius;
           if (aqiNum >= 0 && aqiNum <= 50) {
-            document.getElementById('aqi').setAttribute("style", "color:green;");
+            document.getElementById('aqi').setAttribute("style", "color:lightGreen;");
             document.getElementById('description').textContent = "It's a great day to get outside"
           } else if (aqiNum >= 51 && aqiNum <= 100) {
             document.getElementById('aqi').setAttribute("style", "color:yellow;");
