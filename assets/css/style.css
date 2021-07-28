@@ -20,7 +20,7 @@ p, a {
 }
 
 .hero.is-medium {
-    background: linear-gradient( rgba(255, 255, 255, 0.705), rgba(255, 255, 255, 0.301) ), url('/assets/img/5895672523_2e8ce56485_o1.jpg');
+    background: linear-gradient( rgba(255, 255, 255, 0.705), rgba(255, 255, 255, 0.301) ), url('../img/5895672523_2e8ce56485_o1.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -78,5 +78,8 @@ body .is-child .is-hazardous {
     padding: 4px 8px;
 }
 
+.dropdownH { 
+    width: 100%;
+}
 
 
