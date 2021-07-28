@@ -82,13 +82,13 @@ function fetchWeather(data) {
   $("#data-display").removeClass("is-hidden");
 
   // Getting search input to become lat and long
-  fetch('http://api.positionstack.com/v1/forward?access_key=8b6705bd3db1ed3c15005b1f93926e8e&query=' + data)
+  fetch('https://api.positionstack.com/v1/forward?access_key=8b6705bd3db1ed3c15005b1f93926e8e&query=' + data)
     .then(function (response) {
       return response.json();
     })
     .then(function (searchLatLong) {
       // Getting the current AQI info
-      fetch('http://api.airvisual.com/v2/nearest_city?lat=' + searchLatLong.data[0].latitude + '&lon=' + searchLatLong.data[0].longitude + '&key=a4444be5-06aa-432c-96f8-fadf504bf0e0')
+      fetch('https://api.airvisual.com/v2/nearest_city?lat=' + searchLatLong.data[0].latitude + '&lon=' + searchLatLong.data[0].longitude + '&key=a4444be5-06aa-432c-96f8-fadf504bf0e0')
         .then(function (response) {
           return response.json();
         })
