@@ -22,6 +22,7 @@
 </head>
 
 <body>
+    <!-- Nav bar at top of screen -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
@@ -30,14 +31,14 @@
                 </a>
 
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
-                    data-target="navbarBasicExample">
+                    data-target="navbarBurgerMenu">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                 </a>
             </div>
 
-            <div id="navbarBasicExample" class="navbar-menu">
+            <div id="navbarBurgerMenu" class="navbar-menu">
                 <div class="navbar-end">
                     <a class="navbar-item" href="https://www.airnow.gov/resources/web-cams/" target="_blank">Air Quality
                         Webcams</a>
@@ -47,11 +48,22 @@
         </div>
     </nav>
 
-
-
+    <!-- Hero -->
     <section class="hero is-medium">
         <div class="hero-body has-text-centered">
             <h1 class="title is-3">Search Air Quality</h1>
+
+            <div id="noSearch" class="level is-hidden">
+                <div class="level-item">
+                    <h1 class="title is-3">Please search a city</h1>
+                    <button class="button is-danger is-outlined ml-2 popDelete">
+                        <span class="icon is-small">
+                          <i class="fas fa-times"></i>
+                        </span>
+                    </button>
+                </div>
+            </div>
+
             <div id="hero-input" class="field has-addons has-addons-centered dropdown is-hoverable">
                 <div class="control">
                     <input class="input is-medium dropdown-trigger" id="input-text" type="text" placeholder="Search..." />
@@ -66,12 +78,10 @@
                         <i class="fal fa-search"></i>
                     </a>
                 </div>
-
             </div>
+
         </div>
     </section>
-
-
 
     <div class="container is-max-desktop ">
 
@@ -92,22 +102,15 @@
                 <div class="tile is-vertical is-4">
                     <!-- changing is-* adjusts main content width and changes aside. -->
 
-
                     <div class="tile">
                         <div class="tile is-parent">
                             <article class="tile is-child notification is-link">
 
-                                <p class="subtitle" id="aqiText">Your AQI is: <span id="aqi">55 AQI</span></p>
-                                <p class="subtitle is-size-6" id="description">The air has reached a high level of
-                                    pollution and is unhealthy for sensitive groups. Reduce time spent outside if you
-                                    are feeling symptoms such as difficulty breathing or throat irritation. Stay inside,
-                                    close the windows, try not to inhale too deeply. Avoid smoking. Avoid making any
-                                    dust or disturbance.</p>
+                                <p class="subtitle" id="aqiText">Your AQI is: <span id="aqi"></span></p>
+                                <p class="subtitle is-size-6" id="description"></p>
                             </article>
                         </div>
                     </div>
-
-
                 </div>
                 <!-- main content -->
 
@@ -144,27 +147,19 @@
                             <article class="tile is-child notification is-hazardous">
                                 <p class="title  is-size-5 mb-5"> Hazardous <span class="title is-size-6  has-text-grey-dark">301+</span></p>
                                 <p class="subtitle has-text-grey-dark is-size-6 ">General public will be noticeably affected. Sensitive groups should restrict outdoor activities.</p>                            
-                            </article>
-
-
-                           
+                            </article>   
                         </div>
                     </article>
                 </div>
                 <!-- aside -->
 
-
             </div>
             <!-- tiles -->
 
 
-
             <h2 class="title is-5 has-text-grey-dark mt-5">Five Day Air Quality Forecast for <span
                     class="is-italic is-bold" id="five-day-city"></span></h2>
-
             <div class="columns ">
-
-
 
                 <div class="column has-text-centered">
                     <article>
@@ -197,8 +192,6 @@
                         <h4 class="title is-6 has-text-grey-dark">Air pollution level</h4>
                         <p class="subtitle is-6" id="air-polution-level2"></p>
 
-
-
                         <h4 class="title is-6 has-text-grey-dark">PM 2.5:</h4>
                         <p class="subtitle is-6" id="main-pollutant2"></p>
 
@@ -208,7 +201,6 @@
 
                 <div class="column has-text-centered">
                     <article>
-
                         <figure class="has-background-link has-text-centered mb-2">
                             <p class="" id="forecast-date-3"></p>
                             <p class="is-size-7">US AQi</p>
@@ -218,23 +210,17 @@
                         <h4 class="title is-6 has-text-grey-dark">Air pollution level</h4>
                         <p class="subtitle is-6" id="air-polution-level3"></p>
 
-
-
                         <h4 class="title is-6 has-text-grey-dark">PM 2.5:</h4>
                         <p class="subtitle is-6" id="main-pollutant3"></p>
-
                     </article>
                 </div>
                 <!-- column -->
 
-
-
             </div>
             <!-- columns -->
+
         </section>
         <!-- section -->
-
-
 
         <section class="mt-6">
             <div class="columns is-multiline">
@@ -263,7 +249,6 @@
                             </li>
                             <li>
                         </ul>
-
                     </div>
                 </div>
 
@@ -277,25 +262,25 @@
                         <ul>
                             <li>
                                 <i class="fas fa-caret-right fa-xs icon-padding-right" /></i>
-                                question: Search bar is not responding. 
+                                Question: Search bar is not responding?
                                 <br>
-                                Answer:If search bar is not working please refresh the page and attemp your search again. 
+                                Answer: If search bar is not working please refresh the page and attemp your search again. 
                             </li>
                             <li>
                                 <i class="fas fa-caret-right fa-xs icon-padding-right" /></i>
-                                question: Not getting a new cat fact
+                                Question: Not getting a new cat fact?
                                 <br>
                                 Answer: Refresh the page to get a new cat fact with your air quility.
                             </li>
                             <li>
                                 <i class="fas fa-caret-right fa-xs icon-padding-right" /></i>
-                                Question: Where do I go to find out the air quality of my city
+                                Question: Where do I go to find out the air quality of my city?
                                 <br>
                                 Answer: Place the city name in the search bar to find out the air polition in you city.
                             </li>
                             <li>
                                 <i class="fas fa-caret-right fa-xs icon-padding-right" /></i>
-                                Question: where do I find the air Quality percentage
+                                Question: Where do I find the air Quality percentage?
                                 <br>
                                 Answer: Refer to the box in the top left is the air quality of your city. 
                             </li>
@@ -303,20 +288,13 @@
                     </div>
                 </div>
 
-
-
             </div>
             <!-- columns -->
         </section>
         <!-- section faqs and ways to help -->
 
-
-
-
     </div>
     <!-- container -->
-
-
 
 
     <footer class="footer mt-6">
@@ -328,20 +306,6 @@
             </p>
         </div>
     </footer>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <script src="https://kit.fontawesome.com/2828f7885a.js"
         integrity="sha384-WAsFbnLEQcpCk8lM1UTWesAf5rGTCvb2Y+8LvyjAAcxK1c3s5c0L+SYOgxvc6PWG"

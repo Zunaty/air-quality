@@ -24,16 +24,16 @@ document.addEventListener('DOMContentLoaded', () => {
 $(".delete").click(function () {
   $("#cat-modal").addClass("is-hidden");
 });
+$(".popDelete").click(function () {
+  $("#noSearch").addClass("is-hidden");
+});
 
 // Shows search city data
-
 $("#search").click(function () {
-  $("#data-display").removeClass("is-hidden");
   searchWeather();
 });
 $(document).on('keypress', function (e) {
   if (e.which == 13) {
-    $("#data-display").removeClass("is-hidden");
     searchWeather();
   }
 });
@@ -47,7 +47,7 @@ function catFact() {
     .then(function (catData) {
       var catP = document.getElementById('cat-modal');
       catP.innerHTML = catData.text;
-      console.log(catData)
+      //console.log(catData)
     });
 }
 
@@ -58,9 +58,11 @@ function searchWeather() {
   var searchToL = document.getElementById('input-text').value.toLowerCase();
 
   if(!searchInput){
-    // Need to add an alert modal
+    $("#noSearch").removeClass("is-hidden");
+    return null;
   }
 
+  // Pushing search into history array and filtering out same results
   searchHistory.push(searchToL);
   searchHistory = searchHistory.filter((x, index) => {
     return searchHistory.indexOf(x) === index;
@@ -68,12 +70,19 @@ function searchWeather() {
 
   searchHistory = searchHistory.slice(-5);
   removeAllChildNodes(document.querySelector('#dropdown-history'));
-  searchHistory.forEach(createSH)
+  searchHistory.forEach(createSH);
 
-  saveLocal()
+  saveLocal();
+
+  fetchWeather(searchInput);
+}
+
+function fetchWeather(data) {
+  // Removes class of hidden to show the data
+  $("#data-display").removeClass("is-hidden");
 
   // Getting search input to become lat and long
-  fetch('http://api.positionstack.com/v1/forward?access_key=8b6705bd3db1ed3c15005b1f93926e8e&query=' + searchInput)
+  fetch('http://api.positionstack.com/v1/forward?access_key=8b6705bd3db1ed3c15005b1f93926e8e&query=' + data)
     .then(function (response) {
       return response.json();
     })
@@ -84,7 +93,7 @@ function searchWeather() {
           return response.json();
         })
         .then(function (weatherData) {
-          console.log(weatherData)
+          //console.log(weatherData)
           // This inserts the AQI api number into the main info
           document.getElementById('aqi').innerHTML = " " + weatherData.data.current.pollution.aqius;
           document.getElementById('main-city-name').innerHTML = weatherData.data.city + ", " + weatherData.data.state;
@@ -130,7 +139,7 @@ function searchWeather() {
           return response.json();
         })
         .then(function (forecastInfo) {
-          console.log(forecastInfo);
+          //console.log(forecastInfo);
           document.getElementById('five-day-city').innerHTML = cityF + ", " + stateF;
           for (var i = 0; i < 3; i++) {
             var x = i + 1;
@@ -188,6 +197,13 @@ function createSH(x) {
   a.innerHTML = x;
   document.getElementById('dropdown-history').appendChild(a);
 };
+
+$(".dropdown-content").on("click", "a", function() {
+  // get current text of p element
+  var data = $(this).text().trim();
+  
+  fetchWeather(data);
+});
 
 // Removing all previous searches to update list
 function removeAllChildNodes(parent) {
